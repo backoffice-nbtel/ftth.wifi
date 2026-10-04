@@ -2,40 +2,43 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="utf-8">
+<meta name="theme-color" content="#0a0c10">
+<meta name="color-scheme" content="dark">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>طلب اجازة - قسم الــ Back Office</title>
 <style>
-:root{--bg:#f3f3f3;--card:#fff;--tx:#222;--mu:#6d6d6d;--ac:#f26a0b;--ac2:#ff5a00;--bd:#e0e0e0;--hdr:#fff;--hdrtx:#222}
-@media (prefers-color-scheme:dark){:root{--bg:#121212;--card:#1d1d1d;--tx:#eee;--mu:#a0a0a0;--bd:#333;--hdr:#000;--hdrtx:#fff}}
+:root{color-scheme:dark;--bg:#0f1115;--card:#181b21;--in:#10131a;--tx:#eceff4;--mu:#9aa3b2;--ac:#f26a0b;--ac2:#ff5a00;--bd:#2a2f39;--hdr:#0a0c10;--hdrtx:#ffffff}
 body{margin:0;background:var(--bg);color:var(--tx);font-family:Arial,sans-serif;line-height:1.6}
 header{background:var(--hdr);padding:16px 16px 12px;text-align:center;border-bottom:4px solid var(--ac)}
 .brand{direction:ltr;display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap}
 .brand .ic{width:64px;height:auto;display:block}
 .brand .wm{height:38px;width:auto;display:block}
-.brand .wm.d{display:none}
-@media (prefers-color-scheme:dark){.brand .wm.l{display:none}.brand .wm.d{display:block}}
+.brand .wm.l{display:none}
 header h1{margin:10px 0 0;font-size:18px;color:var(--hdrtx);font-weight:bold}
 main{max-width:600px;margin:0 auto;padding:16px}
 .tabs{display:flex;gap:8px;margin-bottom:14px}
 .tabs button{flex:1;padding:10px;border:1px solid var(--bd);background:var(--card);color:var(--tx);border-radius:10px;font:inherit;cursor:pointer}
 .tabs button.on{background:linear-gradient(90deg,var(--ac),var(--ac2));color:#fff;border-color:transparent}
-.card{background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:14px;margin-bottom:12px}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:14px;margin-bottom:12px;box-shadow:0 2px 10px rgba(0,0,0,.35)}
 label{display:block;font-size:13px;color:var(--mu);margin:10px 0 4px}
-input,select,textarea{width:100%;box-sizing:border-box;padding:10px;border:1px solid var(--bd);border-radius:8px;background:var(--bg);color:var(--tx);font:inherit}
-input:focus,select:focus,textarea:focus{outline:2px solid var(--ac);border-color:transparent}
+input,select,textarea{width:100%;box-sizing:border-box;padding:10px;border:1px solid var(--bd);border-radius:10px;background:var(--in);color:var(--tx);font:inherit}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--ac);box-shadow:0 0 0 3px rgba(242,106,11,.28)}
+select option,select optgroup{background:var(--card);color:var(--tx)}
+::placeholder{color:#6b7482}
+::selection{background:var(--ac);color:#fff}
 .row{display:flex;gap:8px}.row>div{flex:1}
 .btn{padding:12px 16px;border:0;border-radius:10px;background:linear-gradient(90deg,var(--ac),var(--ac2));color:#fff;font:inherit;font-weight:bold;margin-top:14px;width:100%;cursor:pointer}
 .btn:disabled{opacity:.6}
 .tag{padding:2px 10px;border-radius:99px;font-size:12px;color:#fff}
 .p{background:#c48a1a}.a{background:#1f7a5a}.r{background:#b23b3b}.mu{color:var(--mu);font-size:13px}.hd{display:flex;justify-content:space-between}
 .hid{display:none}
-.tot{margin-top:10px;padding:8px 12px;border-radius:8px;background:var(--bg);border:1px dashed var(--ac);font-weight:bold}
+.tot{margin-top:10px;padding:8px 12px;border-radius:8px;background:var(--in);border:1px dashed var(--ac);font-weight:bold}
 .sm{width:auto;padding:6px 16px;margin-top:8px;background:#b23b3b;font-size:13px}
 .w{background:#6d6d6d}
-.warn{border-color:#b23b3b;line-height:1.9}
+.warn{border-color:#d9534f;line-height:1.9}
 .cols{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:6px}
 .dh{text-align:center;font-weight:bold;color:var(--ac);margin-bottom:8px;padding-bottom:4px;border-bottom:2px solid var(--ac)}
-.nm{display:block;width:100%;margin-bottom:6px;padding:10px 4px;border:1px solid var(--bd);border-radius:8px;background:var(--bg);color:var(--tx);font:inherit;cursor:pointer}
+.nm{display:block;width:100%;margin-bottom:6px;padding:10px 4px;border:1px solid var(--bd);border-radius:8px;background:var(--in);color:var(--tx);font:inherit;cursor:pointer}
 .nm.on{background:linear-gradient(90deg,var(--ac),var(--ac2));color:#fff;border-color:transparent}
 optgroup{font-style:normal;font-weight:bold}
 </style>
@@ -46,12 +49,12 @@ optgroup{font-style:normal;font-weight:bold}
 <h1>طلب اجازة - قسم الــ <bdi>Back Office</bdi></h1>
 </header>
 <main>
-<div class="tabs"><button id="t1" class="on" onclick="tab(1)">طلب جديد</button><button id="t2" onclick="tab(2)">طلباتي</button></div>
+<div class="tabs"><button id="t1" class="on" onclick="tab(1)">طلب جديد</button><button id="t2" onclick="tab(2)">طلباتي</button><button id="t3" onclick="tab(3)">سواب</button></div>
 <div id="v"></div>
 </main>
 <script>
 // ===== رابط Google Apps Script =====
-var SCRIPT_URL="https://script.google.com/macros/s/AKfycbzAxQ3uxoEFgDOuakj4Dp84YzZfYm9ajT6cquiunz8JtP6OlHqfYPDXzSZ3LiCHc6Kd/exec";
+var SCRIPT_URL="https://script.google.com/macros/s/AKfycbwczddJuuGmSkmjCF5sHk3T-t6r1wREHRZWpGtm6iFrA3ZSNdIbK6I1oRjpwxkSil1B/exec";
 // ===== قائمة الموظفين (نفس الأسماء في كود الإكسل) =====
 var DEPTS=[
   {n:"FTTH",l:["دينا خالد","مصطفى علي","عبدالرحمن مهند","طه عدنان","وليد خالد","علي غربي","نمير عماد","غفران مهند"]},
@@ -62,11 +65,19 @@ var TYPES=["اعتيادية","مرضية","طارئة","زمنية","بدون �
 // جدول الدوام يُقرأ من شيت «جدول الدوام» في الإكسل ويصل مع بيانات الموظف بعد الدخول
 function t12(x){var p=x.split(":"),n=+p[0];return (n%12||12)+(p[1]!="00"?":"+p[1]:"")+" "+(n>=12?"م":"ص")}
 function lbl(c){if(c=="O")return "عطلة";if(c=="W")return "غير محدد";var p=c.split(" - ");return t12(p[0])+" - "+t12(p[1])}
-function dayCode(n,ds){
+function baseCode(n,ds){
   var sc=me&&me.data&&me.data.sched;if(!sc)return "W";
   var p=ds.split("-"),a=sc.anchor.split("-"),diff=Math.round((Date.UTC(+p[0],+p[1]-1,+p[2])-Date.UTC(+a[0],+a[1]-1,+a[2]))/864e5);
   var d=((diff%7)+7)%7,wk=((Math.floor(diff/7)%2)+2)%2,e=sc.days[n];
   return e?e[wk][d]:"W";
+}
+function dayCode(n,ds){
+  var sc=me&&me.data&&me.data.sched,sw=(sc&&sc.swaps)||[];
+  for(var i=0;i<sw.length;i++){var q=sw[i];
+    if(q.a==n){if(ds==q.x)return baseCode(q.b,q.x);if(ds==q.y)return "O"}
+    else if(q.b==n){if(ds==q.y)return baseCode(q.a,q.y);if(ds==q.x)return "O"}
+  }
+  return baseCode(n,ds);
 }
 function workDays(n,f,e){
   var p=f.split("-"),t=Date.UTC(+p[0],+p[1]-1,+p[2]),q=e.split("-"),end=Date.UTC(+q[0],+q[1]-1,+q[2]),c=0;
@@ -110,8 +121,8 @@ async function api(b){
   try{j=JSON.parse(t)}catch(e){throw new Error("الرابط يرجع صفحة بدل البيانات")}
   return j;
 }
-function tab(n){tabN=n;$("t1").className=n==1?"on":"";$("t2").className=n==2?"on":"";render()}
-function render(){if(!me){loginView();return}tabN==1?form():mine()}
+function tab(n){tabN=n;for(var i=1;i<=3;i++)$("t"+i).className=n==i?"on":"";render()}
+function render(){if(!me){loginView();return}tabN==1?form():tabN==2?mine():swapView()}
 
 /* ---------- الدخول ---------- */
 function loginView(msg){
@@ -125,7 +136,7 @@ async function pickName(n){
   try{
     var j=await api({action:"status",name:n});
     if(pendingName!=n)return;
-    if(!j.ok||typeof j.hasPin==="undefined"){$("au").innerHTML='<div class="card warn" style="margin-top:10px;color:#b23b3b">'+esc(j.error||"الرابط ما زال يعمل بالنسخة القديمة من كود الإكسل. افتح Apps Script ← نشر ← إدارة عمليات النشر ← تعديل ← إصدار جديد ← نشر.")+'</div>';return}
+    if(!j.ok||typeof j.hasPin==="undefined"){$("au").innerHTML='<div class="card warn" style="margin-top:10px;color:#ff7b72">'+esc(j.error||"الرابط ما زال يعمل بالنسخة القديمة من كود الإكسل. افتح Apps Script ← نشر ← إدارة عمليات النشر ← تعديل ← إصدار جديد ← نشر.")+'</div>';return}
     $("au").innerHTML=j.hasPin
       ?'<label>كلمة السر (5 أرقام)</label>'+pinInput("pw")+'<button class="btn" id="lb" onclick="doLogin()">دخول</button>'
       :'<div class="mu" style="margin-top:10px">أول مرة تختار فيها اسمك: أنشئ كلمة سر من 5 أرقام. ستحتاجها كل مرة تدخل فيها لتقديم طلب أو لمعرفة رصيدك.</div><label>كلمة سر جديدة (5 أرقام)</label>'+pinInput("pw")+'<label>أعد كتابتها</label>'+pinInput("pw2")+'<button class="btn" id="lb" onclick="doSetPin()">حفظ كلمة السر والدخول</button>';
@@ -155,7 +166,7 @@ async function doSetPin(){
 function logout(){me=null;pendingName="";loginView()}
 function userBar(){
   var d=me.data;
-  return '<div class="card mu" style="display:flex;justify-content:space-between;align-items:center"><span><b style="color:var(--tx)">'+esc(me.name)+'</b> • '+esc(d.dept)+'<br>المتبقي من رصيدك: <b style="color:var(--tx)">'+d.remaining+'</b> من '+d.quota+' يوم</span><a href="#" onclick="logout();return false" style="color:var(--ac)">تغيير الموظف</a></div>';
+  return '<div class="card mu" style="display:flex;justify-content:space-between;align-items:center"><span><b style="color:var(--tx)">'+esc(me.name)+'</b> • '+esc(d.dept)+'<br>المتبقي من رصيدك: <b style="color:var(--tx)">'+d.remaining+'</b> من '+d.quota+' يوم'+incLink()+'</span><a href="#" onclick="logout();return false" style="color:var(--ac)">تغيير الموظف</a></div>';
 }
 
 /* ---------- طلب جديد ---------- */
@@ -219,11 +230,79 @@ async function send(){
     ls("ph_"+me.name,p);me.data=j;
     if(j.autoRejected){
       var c=j.conflict,dd=c.start==c.end?"يوم "+c.start:"الفترة من "+c.start+" إلى "+c.end;
-      form('<div class="warn" style="color:#b23b3b"><b>تعذّر قبول طلبك.</b><br>سبق للموظف «'+esc(c.name)+'» أن قدّم طلب إجازة في '+esc(dd)+'، ولذلك رُفض طلبك تلقائياً.<br>يمكنك التواصل مع «'+esc(c.name)+'» للاتفاق معه، وإذا سحب طلبه فيمكنك حينها تقديم طلبك من جديد.</div>');
+      form('<div class="warn" style="color:#ff7b72"><b>تعذّر قبول طلبك.</b><br>سبق للموظف «'+esc(c.name)+'» أن قدّم طلب إجازة في '+esc(dd)+'، ولذلك رُفض طلبك تلقائياً.<br>يمكنك التواصل مع «'+esc(c.name)+'» للاتفاق معه، وإذا سحب طلبه فيمكنك حينها تقديم طلبك من جديد.</div>');
       return;
     }
     form('✅ تم إرسال طلبك إلى المدير. تابع حالته من تبويب «طلباتي».');
   }catch(x){alert(why(x));$("sb2").disabled=false;$("sb2").textContent="إرسال الطلب إلى المدير"}
+}
+
+/* ---------- سواب (تبديل العطلات الأسبوعية بين موظفي FTTH) ---------- */
+function today(){return new Date(Date.now()-new Date().getTimezoneOffset()*60000).toISOString().slice(0,10)}
+function addDays(ds,i){var p=ds.split("-");return new Date(Date.UTC(+p[0],+p[1]-1,+p[2])+i*864e5).toISOString().slice(0,10)}
+function dname(ds){var p=ds.split("-");return ["الأحد","الاثنين","الثلاثاء","الأربعاء","الخميس","الجمعة","السبت"][new Date(Date.UTC(+p[0],+p[1]-1,+p[2])).getUTCDay()]+" "+ds}
+function offList(n,filter){var t=today(),r=[];for(var i=0;i<42;i++){var d=addDays(t,i);if(dayCode(n,d)=="O"&&(!filter||filter(d)))r.push(d)}return r}
+function inc(){return ((me&&me.data&&me.data.swaps)||[]).filter(function(s){return s.b==me.name&&s.status=="بانتظار الموظف"}).length}
+function incLink(){var n=inc();return n?'<br><a href="#" onclick="tab(3);return false" style="color:#ff7b72;font-weight:bold">لديك '+n+' طلب سواب بانتظار ردك</a>':''}
+function swTxt(s){
+  var mn=s.a==me.name,o=mn?s.b:s.a,f=mn?s.x:s.y,t=mn?s.y:s.x;
+  return 'مع «'+esc(o)+'»: عطلتك تنتقل من '+dname(f)+' إلى '+dname(t)+'، وعطلته من '+dname(t)+' إلى '+dname(f);
+}
+async function swapView(msg){
+  if(deptOf(me.name)!="FTTH"){$("v").innerHTML=userBar()+'<div class="card mu">خاصية السواب متاحة لموظفي FTTH فقط.</div>';return}
+  $("v").innerHTML='<div class="card mu">جاري التحميل...</div>';
+  try{
+    var j=await api({action:"login",name:me.name,pin:me.pin});
+    if(!j.ok){alert(j.error);logout();return}
+    me.data=j;
+  }catch(x){$("v").innerHTML='<div class="card mu">'+esc(why(x))+'</div>';return}
+  var t=today(),sw=me.data.swaps||[],m={"موافق":"a","مرفوض":"r","مسحوب":"w"};
+  var mates=DEPTS[0].l.filter(function(n){return n!=me.name});
+  var incoming=sw.filter(function(s){return s.b==me.name&&s.status=="بانتظار الموظف"});
+  var others=sw.filter(function(s){return !(s.b==me.name&&s.status=="بانتظار الموظف")});
+  $("v").innerHTML=(msg?'<div class="card">'+msg+'</div>':'')+userBar()+
+  (incoming.length?'<div class="card"><b>طلبات بانتظار ردك</b>'+incoming.map(function(s){return '<div class="mu" style="margin-top:10px">'+swTxt(s)+'<br><button class="btn sm" style="background:#2e8b57" onclick="swr(\''+esc(s.id)+'\',true)">قبول</button> <button class="btn sm" onclick="swr(\''+esc(s.id)+'\',false)">رفض</button></div>'}).join("")+'</div>':'')+
+  '<div class="card"><b>طلب سواب جديد</b><div class="mu">تبديل عطلتك الأسبوعية مع زميل من FTTH. يحتاج موافقة الزميل ثم المدير.</div>'+
+  '<label>يوم عطلتي الذي أريد تبديله</label><select id="swx" onchange="swUpd()"><option value="">اختر اليوم</option>'+offList(me.name).map(function(d){return '<option value="'+d+'">'+dname(d)+'</option>'}).join("")+'</select>'+
+  '<label>الزميل</label><select id="swo" onchange="swUpd()"><option value="">اختر الموظف</option>'+mates.map(function(n){return '<option value="'+esc(n)+'">'+esc(n)+'</option>'}).join("")+'</select>'+
+  '<label>يوم عطلة الزميل الذي أريده</label><select id="swy" onchange="swUpd()"><option value="">اختر الموظف أولاً</option></select>'+
+  '<div id="swn" class="mu" style="margin-top:8px;line-height:1.8"></div>'+
+  '<button class="btn" id="swb" onclick="swSend()">إرسال طلب السواب</button></div>'+
+  (others.length?others.map(function(s){
+    var act=s.a==me.name&&(s.status=="بانتظار الموظف"||s.status=="بانتظار المدير"||s.status=="موافق")&&s.x>=t&&s.y>=t;
+    return '<div class="card"><div class="hd"><b>سواب</b><span class="tag '+(m[s.status]||"p")+'">'+esc(s.status)+'</span></div><div class="mu">'+swTxt(s)+'</div>'+(s.note?'<div class="mu">ملاحظة: '+esc(s.note)+'</div>':'')+(act?'<button class="btn sm" onclick="swd(\''+esc(s.id)+'\')">سحب الطلب</button>':'')+'</div>'}).join(""):'<div class="card mu">لا توجد طلبات سواب سابقة.</div>');
+}
+function swUpd(){
+  var x=$("swx").value,o=$("swo").value,cur=$("swy").value;
+  var ys=o?offList(o,function(d){return d!=x&&dayCode(me.name,d)!="O"}):[];
+  $("swy").innerHTML='<option value="">'+(o?"اختر اليوم":"اختر الموظف أولاً")+'</option>'+ys.map(function(d){return '<option value="'+d+'">'+dname(d)+'</option>'}).join("");
+  if(ys.indexOf(cur)>-1)$("swy").value=cur;
+  var y=$("swy").value,n=[];
+  if(x&&o){var c=dayCode(o,x);n.push(c=="O"?"«"+o+"» عنده عطلة أيضاً في "+dname(x)+"، اختر يوماً آخر.":"ستداوم يوم "+dname(x)+" بدوام «"+o+"»: "+lbl(c))}
+  if(y){var c2=dayCode(me.name,y);n.push("وسيداوم «"+o+"» يوم "+dname(y)+" بدوامك: "+lbl(c2))}
+  $("swn").innerHTML=n.map(esc).join("<br>");
+}
+async function swSend(){
+  var x=$("swx").value,o=$("swo").value,y=$("swy").value;
+  if(!x)return alert("اختر يوم عطلتك");
+  if(!o)return alert("اختر الزميل");
+  if(!y)return alert("اختر يوم عطلة الزميل");
+  $("swb").disabled=true;
+  try{
+    var j=await api({action:"swap_submit",name:me.name,pin:me.pin,x:x,other:o,y:y});
+    if(!j.ok){alert(j.error);$("swb").disabled=false;return}
+    me.data=j;swapView("✅ تم إرسال الطلب إلى «"+esc(o)+"». بعد موافقته يصل إلى المدير.");
+  }catch(e){alert(why(e));$("swb").disabled=false}
+}
+async function swr(id,acc){
+  if(!confirm(acc?"هل تقبل تبديل العطلة؟":"هل ترفض الطلب؟"))return;
+  try{var j=await api({action:"swap_respond",name:me.name,pin:me.pin,id:id,accept:acc});
+    if(!j.ok){alert(j.error);return}me.data=j;swapView(acc?"✅ تم قبول الطلب، وبقي موافقة المدير.":"تم رفض الطلب.")}catch(e){alert(why(e))}
+}
+async function swd(id){
+  if(!confirm("هل أنت متأكد من سحب طلب السواب؟"))return;
+  try{var j=await api({action:"swap_withdraw",name:me.name,pin:me.pin,id:id});
+    if(!j.ok){alert(j.error);return}me.data=j;swapView("تم سحب الطلب.")}catch(e){alert(why(e))}
 }
 
 /* ---------- طلباتي ---------- */
