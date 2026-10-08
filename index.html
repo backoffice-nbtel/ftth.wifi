@@ -54,7 +54,7 @@ optgroup{font-style:normal;font-weight:bold}
 </main>
 <script>
 // ===== رابط Google Apps Script =====
-var SCRIPT_URL="https://script.google.com/macros/s/AKfycbwczddJuuGmSkmjCF5sHk3T-t6r1wREHRZWpGtm6iFrA3ZSNdIbK6I1oRjpwxkSil1B/exec";
+var SCRIPT_URL="https://script.google.com/macros/s/AKfycbxpfTQqLD2c2uqDEZ9-U9pQVnfkxYbHT6lFlmEGf3hKGbcOy2YFFJ51PclobOiETV5N/exec";
 // ===== قائمة الموظفين (نفس الأسماء في كود الإكسل) =====
 var DEPTS=[
   {n:"FTTH",l:["دينا خالد","مصطفى علي","عبدالرحمن مهند","طه عدنان","وليد خالد","علي غربي","نمير عماد","غفران مهند"]},
@@ -84,6 +84,7 @@ function workDays(n,f,e){
   for(var i=0;t<=end&&i<400;i++,t+=864e5){if(dayCode(n,new Date(t).toISOString().slice(0,10))!="O")c++}
   return c;
 }
+function wl(n,c){var sc=me&&me.data&&me.data.sched;return (c=="W"&&!(sc&&sc.days&&sc.days[n]))?"لا يوجد صف له في شيت «جدول الدوام»":lbl(c)}
 function shiftOpts(){var l=(me.data.sched&&me.data.sched.shifts)||[];return l.map(function(s){return '<option value="'+s+'">'+lbl(s)+' ('+s+')</option>'}).join("")}
 // ===================================
 var me=null,tabN=1,pendingName="";
@@ -107,7 +108,7 @@ function subOptions(f){
   var d=deptOf(me.name),list=[];
   DEPTS.forEach(function(x){if(x.n==d)list=x.l.filter(function(n){return n!=me.name})});
   return '<option value="">اختر الموظف البديل</option>'+list.map(function(x){
-    var c=f?dayCode(x,f):"";return '<option value="'+esc(x)+'">'+esc(x)+(c?' — '+lbl(c):'')+'</option>';
+    var c=f?dayCode(x,f):"";return '<option value="'+esc(x)+'">'+esc(x)+(c?' — '+wl(x,c):'')+'</option>';
   }).join("");
 }
 function pinKey(ev,id){
@@ -197,7 +198,7 @@ function tch(auto){
   show("tot",time);
   var f=$("f").value,e=$("e").value,note="";
   if(f){
-    if(one){var c=dayCode(me.name,f);note=c=="O"?"هذا اليوم عطلتك الأسبوعية":c=="W"?"لم يُحدَّد دوامك لهذا اليوم":"دوامك في هذا اليوم: "+lbl(c);}
+    if(one){var c=dayCode(me.name,f);note=c=="O"?"هذا اليوم عطلتك الأسبوعية":c=="W"?(wl(me.name,c)==lbl(c)?"لم يُحدَّد دوامك لهذا اليوم":"لا يوجد صف لك في شيت «جدول الدوام»"):"دوامك في هذا اليوم: "+lbl(c);}
     else if(e&&e>=f){note="عدد أيام الإجازة: "+workDays(me.name,f,e)+" (بعد استثناء عطلتك الأسبوعية)";}
   }
   $("dn").textContent=note;
@@ -278,8 +279,8 @@ function swUpd(){
   $("swy").innerHTML='<option value="">'+(o?"اختر اليوم":"اختر الموظف أولاً")+'</option>'+ys.map(function(d){return '<option value="'+d+'">'+dname(d)+'</option>'}).join("");
   if(ys.indexOf(cur)>-1)$("swy").value=cur;
   var y=$("swy").value,n=[];
-  if(x&&o){var c=dayCode(o,x);n.push(c=="O"?"«"+o+"» عنده عطلة أيضاً في "+dname(x)+"، اختر يوماً آخر.":"ستداوم يوم "+dname(x)+" بدوام «"+o+"»: "+lbl(c))}
-  if(y){var c2=dayCode(me.name,y);n.push("وسيداوم «"+o+"» يوم "+dname(y)+" بدوامك: "+lbl(c2))}
+  if(x&&o){var c=dayCode(o,x);n.push(c=="O"?"«"+o+"» عنده عطلة أيضاً في "+dname(x)+"، اختر يوماً آخر.":"ستداوم يوم "+dname(x)+" بدوام «"+o+"»: "+wl(o,c))}
+  if(y){var c2=dayCode(me.name,y);n.push("وسيداوم «"+o+"» يوم "+dname(y)+" بدوامك: "+wl(me.name,c2))}
   $("swn").innerHTML=n.map(esc).join("<br>");
 }
 async function swSend(){
