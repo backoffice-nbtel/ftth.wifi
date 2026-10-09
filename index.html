@@ -273,39 +273,6 @@ async function swapView(msg){
     var act=s.a==me.name&&(s.status=="بانتظار الموظف"||s.status=="بانتظار المدير"||s.status=="موافق")&&s.x>=t&&s.y>=t;
     return '<div class="card"><div class="hd"><b>سواب</b><span class="tag '+(m[s.status]||"p")+'">'+esc(s.status)+'</span></div><div class="mu">'+swTxt(s)+'</div>'+(s.note?'<div class="mu">ملاحظة: '+esc(s.note)+'</div>':'')+(act?'<button class="btn sm" onclick="swd(\''+esc(s.id)+'\')">سحب الطلب</button>':'')+'</div>'}).join(""):'<div class="card mu">لا توجد طلبات سواب سابقة.</div>');
 }
-function swUpd(){
-  var x=$("swx").value,o=$("swo").value,cur=$("swy").value;
-  var ys=o?offList(o,function(d){return d!=x&&dayCode(me.name,d)!="O"}):[];
-  $("swy").innerHTML='<option value="">'+(o?"اختر اليوم":"اختر الموظف أولاً")+'</option>'+ys.map(function(d){return '<option value="'+d+'">'+dname(d)+'</option>'}).join("");
-  if(ys.indexOf(cur)>-1)$("swy").value=cur;
-  var y=$("swy").value,n=[];
-  if(x&&o){var c=dayCode(o,x);n.push(c=="O"?"«"+o+"» عنده عطلة أيضاً في "+dname(x)+"، اختر يوماً آخر.":"ستداوم يوم "+dname(x)+" بدوام «"+o+"»: "+wl(o,c))}
-  if(y){var c2=dayCode(me.name,y);n.push("وسيداوم «"+o+"» يوم "+dname(y)+" بدوامك: "+wl(me.name,c2))}
-  $("swn").innerHTML=n.map(esc).join("<br>");
-}
-async function swSend(){
-  var x=$("swx").value,o=$("swo").value,y=$("swy").value;
-  if(!x)return alert("اختر يوم عطلتك");
-  if(!o)return alert("اختر الزميل");
-  if(!y)return alert("اختر يوم عطلة الزميل");
-  $("swb").disabled=true;
-  try{
-    var j=await api({action:"swap_submit",name:me.name,pin:me.pin,x:x,other:o,y:y});
-    if(!j.ok){alert(j.error);$("swb").disabled=false;return}
-    me.data=j;swapView("✅ تم إرسال الطلب إلى «"+esc(o)+"». بعد موافقته يصل إلى المدير.");
-  }catch(e){alert(why(e));$("swb").disabled=false}
-}
-async function swr(id,acc){
-  if(!confirm(acc?"هل تقبل تبديل العطلة؟":"هل ترفض الطلب؟"))return;
-  try{var j=await api({action:"swap_respond",name:me.name,pin:me.pin,id:id,accept:acc});
-    if(!j.ok){alert(j.error);return}me.data=j;swapView(acc?"✅ تم قبول الطلب، وبقي موافقة المدير.":"تم رفض الطلب.")}catch(e){alert(why(e))}
-}
-async function swd(id){
-  if(!confirm("هل أنت متأكد من سحب طلب السواب؟"))return;
-  try{var j=await api({action:"swap_withdraw",name:me.name,pin:me.pin,id:id});
-    if(!j.ok){alert(j.error);return}me.data=j;swapView("تم سحب الطلب.")}catch(e){alert(why(e))}
-}
-
 /* ---------- طلباتي ---------- */
 async function wd(id){
   if(!confirm("هل أنت متأكد من سحب هذا الطلب؟"))return;
